@@ -10,11 +10,13 @@ def make_list(path):
                 align = align.strip()
                 sub_l += align
             else:
+                protein = align # 1つの時用
                 l.append(sub_l)
                 sub_l = ""
 
         l.append(sub_l)
         l.pop(0)
+        print(protein)
 
     return l
 
@@ -43,6 +45,11 @@ def p_load():
         refseq_dic = pickle.load(f)
     return refseq_dic
 
+def hdic_load():
+    with open("hdic.pickle", "rb") as f:
+        hdic = pickle.load(f)
+    return hdic
+
 def make_distance(path):
     target_dic = make_dict(path)
     refseq_dic = p_load()
@@ -56,10 +63,32 @@ def make_distance(path):
 
     return len(refseq_keys), scs_distance
 
-path = "input path"
+def h_distance(path):
+    target_dic = make_dict(path)
+
+    for i in range(4):
+        hdic = make_dict("./ncbi_dataset/ace2_"+str(i+1)+".fasta")
+        commonscs = []
+        scs_vector = [0] * len(hdic.keys())
+        hdic_keys = list(hdic.keys())
+        for hkey in range(len(hdic_keys)):
+            if hdic_keys[hkey] in target_dic.keys():
+                scs_vector[hkey] = 1
+                commonscs.append(hdic_keys[hkey])
+        
+        scs_distance = sum(scs_vector)
+
+        print("commonscs = ",scs_distance)
+        print(commonscs)
+        print("-"*80)
+        
+
+path = "ncbi_dataset/alpha1.fasta"
 mutant = "imput name:"
 
-refseq_keys,scs_distance = make_distance(path)
+# refseq_keys,scs_distance = make_distance(path)
 
-print("refseq_scs_num:",refseq_keys)
-print(mutant,scs_distance)
+# print("refseq_scs_num:",refseq_keys)
+# print(mutant,scs_distance)
+
+h_distance(path)

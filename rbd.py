@@ -3,18 +3,6 @@ import csv
 import pickle
 
 
-# scsの出現回数を数える
-def count_scs(l):
-    d = {}
-    scs = 5
-    for sub in l:
-        for i in range(len(sub) - scs + 1):
-            if sub[i:i+scs] not in d.keys():
-                d[sub[i:i+scs]] = 1
-            else:
-                d[sub[i:i+scs]] += 1
-    
-    return d
 
 # とりあえず1つずつ
 def def_rbd(type):
@@ -113,7 +101,7 @@ def csv_nonself_count(path,type):
         print(rbd_nonself_place_list[0])
     
     
-csv_nonself_count("./csv/omicron.csv","omicron")
+csv_nonself_count("./csv/refseq.csv","refseq")
     
 
             
