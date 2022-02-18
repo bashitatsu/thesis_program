@@ -1,0 +1,46 @@
+\chapter{解析手法(仮)}
+
+\section{SCS距離に基づく解析手法}
+本節では，本研究で提案する二部グラフの作成方法と，それに必要なベース辞書について，また解析手法について説明する．二部グラフとは，頂点集合$V$が，2つの部分集合$V_1, V_2$に分割され，それぞれの部分集合内の頂点同士が隣接しないグラフのことである．特に，$V_1$のそれぞれの頂点が$V_2$の全ての頂点に隣接しているグラフを完全二部グラフという．本研究では，2つの部分集合を異なる種のそれぞれのタンパク質の集合としている．
+
+%\subsection{ベース辞書と二部グラフ}
+\subsection{ベース辞書}
+ベース辞書とは，ある種の$n$個のタンパク質データに存在する全てのSCSを登録した辞書のことである．ベース辞書のサイズは，$n$個のタンパク質データに含まれるSCSの種類に一致する．すなわち，アミノ酸の集合を$\mathit{AminoAcid}$とした時，ベース辞書$\mathit{BaseDict}$は式(\ref{basedict})で表される．
+\begin{align}
+\mathit{AminoAcid} &=& \{\mathit{A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y}\}\\
+\label{basedict}
+\mathit{BaseDict} &=& \{\ X_1^i X_2^iX_3^iX_4^iX_5^i\ |\ X_j^i \in \mathit{AminoAcid}, i = 1, 2, 3, \cdots , N \}
+\end{align}
+ここで$N$はベース辞書のサイズであり，元にしたタンパク質によって決まる．
+\subsection{SCS距離}
+%ここに図
+前節で定義したベース辞書に基づくタンパク質$P$のSCSベクトルを次式のように定義する．なお$SCS(P)$とは，タンパク質$P$に含まれる全てのSCSである．
+\begin{eqnarray}
+\mathit{SCSVec(P)[\ i\ ]} =  
+\begin{cases}
+1&X_1^i X_2^iX_3^iX_4^iX_5^i \in \mathit{SCS(P)}\\
+0&\mathrm{otherwise}
+\end{cases}
+\end{eqnarray}
+次に二部グラフの作成のために，異なる種のそれぞれのタンパク質の頂点集合$V_1, V_2$を用意する．$V_1, V_2$の隣接する頂点のSCSベクトルの論理積をとり，1の数をグラフの辺の重み(SCS距離)とする．
+\begin{align}
+\mathit{SCSDis}(v_1, v_2) &=& \sum\land(\mathit{SCSVec}(v_1), \mathit{SCSVec}(v_2)), v_1\in V_1, v_2 \in V_2
+\end{align}
+%
+\begin{eqnarray}
+\mathit{SCSVec}(P)[\ i\ ] &=&  
+\begin{cases}
+1&X_1^i X_2^iX_3^iX_4^iX_5^i \in \mathit{SCS}(P)\\
+0&\mathrm{otherwise}
+\end{cases}
+\end{eqnarray}
+
+ここで$\land$はベクトルの要素間の論理積，$\sum$はベクトルの要素の総和を求めるものとする．同様に，他の隣接する頂点でも行うことで，$V_1, V_2$を頂点集合とし，そして辺の重みが付いた完全二部グラフ$G = (V, E)$が作成できる．
+ただし,
+\begin{eqnarray}
+V &=& V_1 \cup V_2,\ V_1 \cap V_2 = \phi\\
+E &=&  V_1 \times V_2\\
+V_1 &=& \{P_1^1,\ P_2^1,\ P_3^1,\ P_4^1,\ P_5^1\}\\
+V_2 &=& \{P_1^2,\ P_2^2,\ P_3^2,\ P_4^2,\ P_5^2\}
+\end{eqnarray}
+である．$P_j^i$は種$i$の$j$番目のタンパク質を表す．

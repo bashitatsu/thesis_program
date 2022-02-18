@@ -113,9 +113,9 @@ def get_seq(read):
     return all_aa
 
 import csv
-from email import header
-target_path = "./csv/omicron.csv" # 変異株のcsvのパス
-refseq_path = "./csv/refseq.csv" # refseqのパス
+# from email import header
+target_path = "../csv/omicron/sequence-5.csv" # 変異株のcsvのパス
+refseq_path = "../csv/refseq/sequences.csv" # refseqのパス
 
 csv_file = open(target_path, "r", encoding="utf_8", errors="", newline="" )
 csv_file_refSeq = open(refseq_path, "r", errors="", newline="", encoding='utf-8-sig')
@@ -154,7 +154,7 @@ for row in f_ref:
                 print(F"{Color.BLACK}{row[2]}", end='')
         if int(ID[1]) % 60 == 0: # このアミノ酸が60の倍数個なら
             print(F"  {Color.RESET}{ID[1].rjust(4)}", end="")
-
+print("\n")
 # print("\n",nonself)
 nonself=0
 # target
@@ -171,14 +171,16 @@ for row in f:
                 print(F"{Color.BG_GREEN2}{Color.BLACK}{row[2]}{Color.RESET}", end="")
         else:
             ### 追加してみた
-            if targetSeq[int(ID[1]) - 1:int(ID[1]) + 4] not in scsDictRefSeq: # targetのscs辞書にないなら
-                print(F"{Color.BG_CYAN}{Color.BLACK}{row[2]}{Color.RESET}", end="")
+            if targetSeq[int(ID[1]) - 1:int(ID[1]) + 4] not in scsDictRefSeq: # refseqのscs辞書にないなら
+                if len(f) - int(ID[1]) > 3: # とりあえず入れてみた
+                    print(F"{Color.BG_CYAN}{Color.BLACK}{row[2]}{Color.RESET}", end="")
             #if targetSeq[int(ID[1]) - 1:int(ID[1]) + 4] not in scsDictRefSeq:
             else:
                 print(F"{Color.BLACK}{row[2]}", end='')
         if int(ID[1]) % 60 == 0:
             print(F"  {Color.RESET}{ID[1].rjust(4)}", end="")
 
+print("\n")
 # print("\n",nonself)
 csv_file.close()
 csv_file_refSeq.close()

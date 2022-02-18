@@ -46,12 +46,10 @@ def csv_nonself_count(path,type):
 
         # print(nonself_num_list)
         # print(nonself_place_list)
-        print(type,": ",len(nonself_num_list))
+        print(type,": ",nonself_num_list ,nonself_num_list[0],)
+        print(nonself_place_list[0])
     
     
-csv_nonself_count("../csv/orf1ab/delta.csv","refseq")
-    
-
+csv_nonself_count("../csv/orf1ab/refseq.csv","refseq")
             
         
-            

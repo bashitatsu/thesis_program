@@ -18,7 +18,10 @@ def make_list(path):
 
         l.append(sub_l)
         l.pop(0)
-
+    count = 0
+    for s in l:
+        count += len(s)
+    print(count)
     return l
 
 # scsの出現回数を数える
@@ -32,6 +35,7 @@ def count_scs(l):
             else:
                 d[sub[i:i+scs]] += 1
     
+    print(len(d.keys()))
     return d
 
 # 1番多いのはHTGEKで18073回出現
@@ -39,14 +43,14 @@ def count_scs(l):
 
 
 def p_dump(ob):
-    with open("refseq_dic.pickle","wb") as f:
+    with open("../ncbi_dataset/refseq/refseq_dic.pickle","wb") as f:
         pickle.dump(ob,f)
 
 #実質main
 def write_csv(CDataPath):
-    DataPath = "./protein.faa"
+    # DataPath = "./protein.faa"
     #CDataPath = "./covid/B_B_Omicron_dd.faa"
-    writePath = "../csv/spike/"
+    writePath = "../csv/refseq/"
 
     scs = 5
     # ヒト
@@ -83,7 +87,27 @@ def write_csv(CDataPath):
 # cdic = count_scs(clist)
 # print(len(cdic.keys()))
 
-cdatapath = "../ncbi_dataset/spike/refseq.fasta"
+cdatapath = "../ncbi_dataset/refseq/sequences.fasta"
 write_csv(cdatapath)
 
+# make_list("../protein.faa")
+
+# count_scs(make_list(cdatapath))
+# count_scs(make_list("../ncbi_dataset/spike/alpha1.fasta"))
+# count_scs(make_list("../ncbi_dataset/spike/beta1.fasta"))
+# count_scs(make_list("../ncbi_dataset/spike/gamma1.fasta"))
+# count_scs(make_list("../ncbi_dataset/spike/delta1.fasta"))
+# count_scs(make_list("../ncbi_dataset/spike/omicron.fasta"))
+# with open("../hdic.pickle", "rb") as f:
+#         hdic = pickle.load(f)# 
 # print(make_list("ace2_1.fasta"))
+# print(len(hdic.keys()))
+# l = make_list("../ncbi_dataset/refseq/sequences.fasta")
+# d = count_scs(l)
+# p_dump(d)
+
+# for i in range(12):
+#     # path1 = "../ncbi_dataset/omicron/sequence-"+str(i+1)+".fasta"
+#     path2 = "../ncbi_dataset/delta/sequence-"+str(i+1)+".fasta"
+
+#     write_csv(path2)

@@ -101,7 +101,7 @@ def csv_nonself_count(path,type):
         print(rbd_nonself_place_list[0])
     
     
-csv_nonself_count("./csv/refseq.csv","refseq")
+csv_nonself_count("../csv/spike/alpha1.csv","refseq")
     
 
             

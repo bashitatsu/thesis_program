@@ -15,11 +15,12 @@ l2 = []
 for row in l:
     l2.append(pd.Series(row))
 
-label = ["refseq","alpha","beta","gamma","delta","omicron"]
+label = ["RefSeq","Alpha","Beta","Gamma","Delta","Omicron"]
 
 df = pd.DataFrame()
 for i in range(len(l2)):
     df[label[i]] = l2[i]
 
 sns.stripplot(data = df,jitter=False,size=4)
+plt.ylabel("Amino Acid(Number)", fontsize = 14)
 plt.show()

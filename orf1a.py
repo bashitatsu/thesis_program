@@ -38,7 +38,7 @@ def count_scs(l):
 
 #実質main
 def write_csv(CDataPath):
-    writePath = "../csv/orf1ab/"
+    writePath = "../csv/orf1a/"
 
     scs = 5
     # ヒト
@@ -66,5 +66,5 @@ def write_csv(CDataPath):
                 else:
                     f.write("{0}-{1},{2},{3},{4}\n".format(i+1,ii+1,"-",clist[i][ii],"-"))
 
-cdatapath = "../ncbi_dataset/orf1ab/gamma.fasta"
+cdatapath = "../ncbi_dataset/orf1a/omicron.fasta"
 write_csv(cdatapath)
